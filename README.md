@@ -2,12 +2,13 @@
 
 ![Screenshot](https://github.com/lfontanez/php-chatgpt/raw/master/screenshot.png)
 
-This project demonstrates a ChatGPT demo using the OpenAI API in PHP. The code allows you to have interactive conversations with the ChatGPT model.
+This project demonstrates ChatGPT using the [OpenAI](https://openai.com/) API in PHP. The code allows you to have interactive conversations with the ChatGPT model. If enabled, it can execute an available Text-to-Speech (TTS) command to audibly speak responses.
 
 ## Prerequisites
 
 - PHP 8.1 installed on your system
 - `composer` package manager installed
+- For TTS you need a command like `say` in Linux/MacOS, [espeak](https://espeak.sourceforge.net/) (multi-platform alternative), or the native SAPI Speech Synthesis for Windows.
 
 ## Getting Started
 
@@ -27,7 +28,7 @@ composer install
 ```
 php chatgpt.php
 ```
-If php is not in your environment path you will need use the full path to your desired PHP binary.
+If `php` is not in your environment path you need to use the full path to your desired PHP binary. Example: `/usr/bin/php`
 
 6. Start interacting with the ChatGPT model by entering your messages in the command line where prompted.
 
