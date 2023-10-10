@@ -1,6 +1,6 @@
 # PHP ChatGPT DEMO v1.0 #
 
-![Image Description](https://github.com/lfontanez/php-chatgpt/raw/main/path/to/screenshot.png)
+![Screenshot](https://github.com/lfontanez/php-chatgpt/raw/master/screenshot.png)
 
 This project demonstrates a ChatGPT demo using the OpenAI API in PHP. The code allows you to have interactive conversations with the ChatGPT model.
 
