@@ -1,5 +1,5 @@
 .DS_Store
 .env
 vendor
-php-chatgpt.sublime-project
-php-chatgpt.sublime-workspace
+*.sublime-project
+*.sublime-workspace

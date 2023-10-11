@@ -7,7 +7,7 @@ This project demonstrates ChatGPT using the [OpenAI](https://openai.com/) API in
 ## Prerequisites
 
 - PHP 8.1 installed on your system
-- `composer` package manager installed
+- `composer` package manager installed. Look at `composer.json` for specific dependencies.
 - For TTS you need a command like `say` in Linux/MacOS, [espeak](https://espeak.sourceforge.net/) (multi-platform alternative), or the native SAPI Speech Synthesis for Windows.
 
 ## Getting Started
@@ -21,7 +21,7 @@ composer install
 ```
 3. Rename the `.env.example` file to `.env` and update the environment variables with your OpenAI API key and other desired configurations.
 
-4. Open the `chatgpt.php` file in your PHP IDE or text editor.
+4. Open the `chatgpt.php` file in your PHP IDE or text editor. Review it and make any necessary edits.
 
 5. Run the PHP script in the command line:
 
