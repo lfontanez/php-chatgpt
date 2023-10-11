@@ -13,20 +13,14 @@ $yourApiKey = $_ENV['OPEN_AI_KEY'];
 $client = OpenAI::client($yourApiKey);
 
 # Define Model and Limits
-$model=$_ENV['DEFAULT_MODEL'];
-$limit=intval($_ENV['CHAT_LIMIT']);
-$max_tokens=intval($_ENV['MAX_TOKENS']);
-$tts=boolval($_ENV['TTS_ENABLE']);
-$tts_command=$_ENV['TTS_COMMAND'];
-
-# Define messages
-$messages = array();
-$message = array();
-$input='';
-$i=0;
+$model = $_ENV['DEFAULT_MODEL'];
+$limit = intval($_ENV['CHAT_LIMIT']);
+$max_tokens = intval($_ENV['MAX_TOKENS']);
+$tts = boolval($_ENV['TTS_ENABLE']);
+$tts_command = $_ENV['TTS_COMMAND'];
 
 # Clear screen
-echo "\e[H\e[J";
+echo "\e[H\e[J"; // escape magic!
 
 # Logo
 echo"\e[0;36m
@@ -44,7 +38,13 @@ echo "Context Memory: ephemeral" . PHP_EOL;
 echo "{$max_tokens} tokens" . PHP_EOL;
 if ($tts) echo "TTS enabled: {$_ENV["TTS_ENABLE"]}\e[0m" . PHP_EOL . PHP_EOL;
 
-	# Chat Loop
+# Define some variables
+$messages = array();
+$message = array();
+$input = '';
+
+$i=0;
+	# Chat Loop	
 	while ($input != 'bye' && $i < $limit) {
 
 		echo "[You] ";
@@ -60,26 +60,26 @@ if ($tts) echo "TTS enabled: {$_ENV["TTS_ENABLE"]}\e[0m" . PHP_EOL . PHP_EOL;
 		$messages[] = $message;
 
 		if ($input != 'bye') {
+
 			# Define data
 			$data = array();
 			$data["model"] = $model;
 			$data["messages"] = $messages;
 			$data["max_tokens"] = $max_tokens;
 
-			$last_response = $client->chat()->create($data);
-			
-			$responses[] = $last_response;
+			$last_response = $client->chat()->create($data);	
+			$responses[] = $last_response; // for inspecting later
 
-			# Current Response
+			# Process Current Response
 			$say = $last_response["choices"][0]["message"]["content"];
-			$messages[] = $last_response["choices"][0]["message"];
+			$messages[] = $last_response["choices"][0]["message"]; // append to context window
 			echo "\e[0;37m[OPEN AI] "  . $say . PHP_EOL;
 			echo "\e[0m" . PHP_EOL;
 
 			# TTS Utterance
 			if ($tts) {
 				$command = "$tts_command $say";
-			 	exec(escapeshellcmd($command));
+			 	exec(escapeshellcmd($command)); // escaped command to avoid Ai Overlord Apocalypse
 			}
 		}
 	$i++;
@@ -92,7 +92,8 @@ echo "\e[0;37m[OPEN AI] {$say}\e[0m"  . PHP_EOL;
 # TTS Utterance
 if ($tts) {
 	$command = "say $say";
-	exec(escapeshellcmd($command));
+	exec(escapeshellcmd($command)); // escaped command to avoid Ai Overlord Apocalypse
 }
 
-echo "\e[0;36mChat ended.\e[0m". PHP_EOL;
+echo "\e[0;36mChat ended. The soul is in the software.\e[0m". PHP_EOL;
+exit; // Na ah! Just in case Ai Overlord was counting on me not exiting the script.
